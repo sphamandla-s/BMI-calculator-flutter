@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/IbmLayout.dart';
 import 'package:flutter/material.dart';
+import 'package:bmi_calculator/gender.dart';
 
 import 'CardLayout.dart';
 
@@ -11,6 +12,35 @@ class InputApp extends StatefulWidget {
 }
 
 class _InputAppState extends State<InputApp> {
+  int _maleColor = 0xFF1D1E33;
+  int _femaleColor = 0xFF1D1E33;
+  final int _activeColor = 0xFF1D1E33;
+
+  void _changeColor(Gender gender) {
+    if(gender == Gender.male && _maleColor == _activeColor){
+      setState(() {
+        _maleColor = 0xFFFFFFF;
+        _femaleColor = _activeColor;
+      });
+    } else if(gender == Gender.male && _maleColor != _activeColor) {
+      setState(() {
+        _maleColor = _activeColor;
+      });
+    } else if(gender == Gender.female && _femaleColor == _activeColor) {
+      setState(() {
+        _femaleColor = 0xFFFFFFF;
+        _maleColor = _activeColor;
+      });
+    } else if(gender == Gender.female && _femaleColor != _activeColor){
+      setState(() {
+        _femaleColor = _activeColor;
+      });
+    }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +51,18 @@ class _InputAppState extends State<InputApp> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children:  [
                 Expanded(
-                  child: IbmLayout(
-                    Color(0xFF1D1E33),
-                    CardLayout("MALE", Icons.male_outlined)
+                  child: GestureDetector( onTap: (){_changeColor(Gender.male);},
+                    child: IbmLayout(
+                      Color(_maleColor),
+                      const CardLayout("MALE", Icons.male_outlined)
+                    ),
                   ),
                 ),
                 Expanded(
                   child:
-                      IbmLayout(Color(0xFF1D1E33), CardLayout("FEMALE", Icons.female_outlined)),
+                      GestureDetector(onTap: (){_changeColor(Gender.female);}, child: IbmLayout(Color(_femaleColor), CardLayout("FEMALE", Icons.female_outlined))),
                 ),
               ],
             ),
