@@ -12,7 +12,7 @@ class CardLayout extends StatelessWidget {
       children:  [
         Icon(
           cardIcon,
-          size: 50.0,
+          size: 60.0,
         ),
         const SizedBox(height: 10.0),
         Text(

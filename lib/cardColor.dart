@@ -1,4 +1,0 @@
-enum CardColor {
-  activeColor,
-
-}
